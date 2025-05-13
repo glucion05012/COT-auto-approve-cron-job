@@ -8,7 +8,7 @@ SELECT 'Datetime Conversion Updated:', ROW_COUNT();
 -- 1. Auto-sign Attester (6 hrs after Checker)
 INSERT INTO esignature (
   file_name, file_location, cot_id, signatory, sig_position,
-  time_date_signed, date_signed, user_type
+  time_date_signed, date_signed, user_type, auto_signed
 )
 SELECT 
   'docena.png',
@@ -19,7 +19,7 @@ SELECT
   CONCAT(
   DATE_FORMAT(NOW(), '%M %d, %Y %l:%i:'),
   LOWER(DATE_FORMAT(NOW(), '%p'))
-), DATE_FORMAT(NOW(), '%Y-%m-%d'), 'attester'
+), DATE_FORMAT(NOW(), '%Y-%m-%d'), 'attester', 'yes'
 FROM esignature es
 JOIN certificate_of_transshipment ct ON ct.cot_id = es.cot_id
 LEFT JOIN esignature next_es ON next_es.cot_id = es.cot_id AND next_es.user_type = 'attester'
@@ -41,7 +41,7 @@ SELECT 'Attester Updated:', ROW_COUNT();
 -- 2. Auto-sign Evaluator (6 hrs after Attester)
 INSERT INTO esignature (
   file_name, file_location, cot_id, signatory, sig_position,
-  time_date_signed, date_signed, user_type
+  time_date_signed, date_signed, user_type, auto_signed
 )
 SELECT 
   'sanchez.jpg',
@@ -52,7 +52,7 @@ SELECT
   CONCAT(
   DATE_FORMAT(NOW(), '%M %d, %Y %l:%i:'),
   LOWER(DATE_FORMAT(NOW(), '%p'))
-), DATE_FORMAT(NOW(), '%Y-%m-%d'), 'evaluator'
+), DATE_FORMAT(NOW(), '%Y-%m-%d'), 'evaluator', 'yes'
 FROM esignature es
 JOIN certificate_of_transshipment ct ON ct.cot_id = es.cot_id
 LEFT JOIN esignature next_es ON next_es.cot_id = es.cot_id AND next_es.user_type = 'evaluator'
@@ -74,7 +74,7 @@ SELECT 'Evaluator Updated:', ROW_COUNT();
 -- 3. Auto-sign Reviewer (30 mins after Evaluator)
 INSERT INTO esignature (
   file_name, file_location, cot_id, signatory, sig_position,
-  time_date_signed, date_signed, user_type
+  time_date_signed, date_signed, user_type, auto_signed
 )
 SELECT 
   'pacis.png',
@@ -85,7 +85,7 @@ SELECT
   CONCAT(
   DATE_FORMAT(NOW(), '%M %d, %Y %l:%i:'),
   LOWER(DATE_FORMAT(NOW(), '%p'))
-), DATE_FORMAT(NOW(), '%Y-%m-%d'), 'reviewer'
+), DATE_FORMAT(NOW(), '%Y-%m-%d'), 'reviewer', 'yes'
 FROM esignature es
 JOIN certificate_of_transshipment ct ON ct.cot_id = es.cot_id
 LEFT JOIN esignature next_es ON next_es.cot_id = es.cot_id AND next_es.user_type = 'reviewer'
@@ -107,7 +107,7 @@ SELECT 'Reviewer Updated:', ROW_COUNT();
 -- 4. Auto-sign Approver (30 mins after Reviewer)
 INSERT INTO esignature (
   file_name, file_location, cot_id, signatory, sig_position,
-  time_date_signed, date_signed, user_type
+  time_date_signed, date_signed, user_type, auto_signed
 )
 SELECT 
   'matias.png',
@@ -118,7 +118,7 @@ SELECT
   CONCAT(
   DATE_FORMAT(NOW(), '%M %d, %Y %l:%i:'),
   LOWER(DATE_FORMAT(NOW(), '%p'))
-), DATE_FORMAT(NOW(), '%Y-%m-%d'), 'approver'
+), DATE_FORMAT(NOW(), '%Y-%m-%d'), 'approver', 'yes'
 FROM esignature es
 JOIN certificate_of_transshipment ct ON ct.cot_id = es.cot_id
 LEFT JOIN esignature next_es ON next_es.cot_id = es.cot_id AND next_es.user_type = 'approver'

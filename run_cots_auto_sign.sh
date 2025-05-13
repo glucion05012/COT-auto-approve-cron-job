@@ -4,7 +4,7 @@
 USER="root"
 PASSWORD='$2y$10$K1hW8Cz/7q6P7T1LJZlUIOV5m3PjJThHyZJndcGziUURCgBzUpU2e'
 HOST="127.0.0.1"
-DATABASE="cots_test"
+DATABASE="cots"
 SQL_FILE="/systems/scripts/cots_auto_sign.sql"
 
 LOG="/tmp/auto_sign.log"
